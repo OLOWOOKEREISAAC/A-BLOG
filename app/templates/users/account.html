@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{%block page_content%}
+<div class="content-section">
+   <img class="rounded-circle  account-img" src="{{ profile_pics }}" alt="">
+
+   <h1> {{current_user.name}}</h1>
+    <br>
+   <p>  {{current_user.email}}</p>
+   <br>
+   <p>  {{current_user.name}} from {{current_user.location}}</p>
+   <br>
+   <p>  {{current_user.About_me }}</p>
+   <a class="btn btn-default" href="{{ url_for('users.editprofile') }}">Edit profile</a>
+</div>
+
+
+
+{%endblock%}

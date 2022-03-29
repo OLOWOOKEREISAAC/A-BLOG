@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+
+{%block title %}
+ super() 
+Reset Password
+{%endblock%}
+
+{% block page_content %}
+
+<h1>Reset Password</h1>
+
+<form action="" method="post">
+    {{ wtf.quick_form(form)}}
+</form>
+{% endblock %}

@@ -1,0 +1,44 @@
+{%extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{%block title%} {{ super() }} index {%endblock%}
+{%block page_content%}
+    <div class = 'page-header' >
+        <h1>
+            {{user.name |capitalize}} has {{post.total}} posts
+            
+        </h1>
+    </div>  
+
+    <ul class="posts">
+        {% for post in post.items %}
+         
+            <li class="post">
+                <div class="profile-thumbnail">
+                    <img class="img-rounded profile-thumbnail" src="{{url_for('static', filename='pics/' + post.user.profilepic )}}">
+                </div>
+                <div>
+                    <p>{{ post.user.name }} {{moment(post.posted).format('L')}}</p>
+                    <h2><a class="article-title" href="{{ url_for('posts.post', post_id=post.id) }}">{{post.title|capitalize}}</a></h2>
+                </div>
+                <br>     
+            </li>
+        {%endfor %}
+        
+    </ul>
+    <div class="container" >
+        {% for num in post.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+            {% if num %}
+                {% if num == post.page %}
+                    <a class="btn btn-info mb-4" href="{{ url_for('main.index', page = num ) }}">{{num}}</a>
+                {% else %}
+                    <a class="btn btn-outline-info mb-4" href="{{ url_for('main.index', page = num ) }}">{{num}}</a>
+                {%endif%}
+            {% else %} 
+                .... 
+            {%endif%}
+        {% endfor %} 
+        <hr> 
+    </div>  
+    
+{%endblock%}

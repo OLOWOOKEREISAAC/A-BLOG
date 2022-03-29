@@ -1,0 +1,54 @@
+{%extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{%block title%} {{ super() }} index {%endblock%}
+{%block page_content%}
+    <div class = 'page-header'>
+        <h1>
+            Hello, {%if current_user.is_authenticated %} 
+            {{current_user.name|capitalize }} 
+            <br>
+            <p>welcome</p>
+            {%else %} 
+            Stranger 
+            <br>
+            <big> I'll love it if you registered</big>
+            {% endif %}
+            
+        </h1>
+    </div>
+    <ul class="posts">  
+        {% for post in posts.items %}
+        
+            <li class="post">
+                <div class="profile-thumbnail">
+                    <img class="img-rounded profile-thumbnail" src="{{url_for('static', filename='pics/' + post.user.profilepic )}}">
+                </div>
+                <div>
+                    <a class="" href="{{url_for('posts.users_posts', username=post.user.name)}}">{{ post.user.name }}</a>  {{moment(post.posted).format('L')}}
+                    <h2><a class="article-title" href="{{ url_for('posts.post', post_id=post.id) }}">{{post.title|capitalize}}</a></h2>
+                </div>
+                <br>     
+            </li>
+            <hr>
+        {%endfor %}
+        
+    </ul>
+    <div>
+        {% for num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+            {% if num %}
+                {% if num == posts.page %}
+                    <a class="btn btn-info mb-4" href="{{ url_for('main.index', page = num ) }}">{{num}}</a>
+                {% else %}
+                    <a class="btn btn-outline-info mb-4" href="{{ url_for('main.index', page = num ) }}">{{num}}</a>
+                {%endif%}
+            {% else %} 
+                .... 
+            {%endif%}
+        {% endfor %}  
+    </div>  
+    <br>
+    <p> This is the local date and time {{ moment(current_time).format('LLL') }}. </p>
+    <P> That was {{moment(current_time).format('L') }}</P>
+    </br>
+{%endblock%}

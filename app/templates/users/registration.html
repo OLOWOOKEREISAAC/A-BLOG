@@ -1,0 +1,13 @@
+{%extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+
+{%block title%} {{ super() }} Register {%endblock%}
+{%block page_content%}
+<form action="/Register" , method="post">
+
+    {{ wtf.quick_form(form)}}
+
+</form>
+
+{%endblock%}
