@@ -7,7 +7,7 @@ It contains:
 - Email resets
 - setting of profile pictures
 - Database migrations 
-- and much more to bring the app alive
+- and much more to bring the app to life
 
 I hope you appreciate the code, you can reach out to me via isaacolowookere1@gmail.com.
 I am open to work.
